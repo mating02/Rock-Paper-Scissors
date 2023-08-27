@@ -1,6 +1,7 @@
 let scorePlayer = 0;
 let scorePc = 0;
 let playerBeat = 0;
+let buttonDisabled = false;
 function getComputerChoice() {
     let options = ['scissors', 'rock', 'paper'];
     return options[Math.floor(Math.random() * 3)];
@@ -50,74 +51,83 @@ function playRound(playerSelection, ComputerSelection) {
 }
 
 originalContent = `
-<header>
-        <h1 style="text-align: center;">Rock Paper Scissors</h1>
-    </header>
-    <div class="buttons">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
-    </div>
-    <div class="scores">
-        <div id="pcScore">Scorpion: 0</div>
-        <div id="playerScore">Du: 0</div>
-    </div>
+<header id="header">
+    <h1>Rock Paper Scissors</h1>
+</header>
+<div class="buttons">
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+</div>
+<div class="scores">
+    <div id="pcScore">Scorpion: 0</div>
+    <div id="playerScore">Du: 0</div>
+</div>
 `;
 
+container = document.querySelector('.flex-container');
+
 function displayLoss(){
-    document.body.setAttribute('style', "opacity: 0; transition: opacity 0.5s ease-in-out;");
+    document.body.setAttribute('style', "opacity: 0; transition: opacity 3s ease-in-out;");
     setTimeout(() => {
-        document.body.innerHTML = '';
+        container.innerHTML = '';
         document.body.setAttribute('style', "opacity: 1; transition: none;\
-background-image: url('https://media.tenor.com/aNya2k4nU9AAAAAC/mortal-kombat.gif');\
-background-size: cover; background-repeat: no-repeat; background-position: center center;");
+background-image: url('https://media.tenor.com/aNya2k4nU9AAAAAC/mortal-kombat.gif');");
     const result = document.createElement('h1');
     result.textContent = "YOU LOSE! ...DARE TO TRY AGAIN?";
     result.setAttribute('style', 'color: red;');
-    document.body.appendChild(result);
+    container.appendChild(result);
 
     const reset = document.createElement('button');
     reset.setAttribute('style', 'padding: 8px; font-size: 18px; font-family: "Comic Sans", sans-serif;');
     reset.textContent = 'RESET';
-    document.body.appendChild(reset);
+    container.appendChild(reset);
 
     reset.addEventListener('click', () => {
         scorePlayer = 0;
         scorePc = 0;
         playerBeat = 0;
-        document.body.innerHTML = originalContent;
+        container.innerHTML = originalContent;
+        document.body.setAttribute('style', "background-image: url('https://media.tenor.com/Ql7S1U-bqPIAAAAC/mortal-kombat.gif');");
+
+        setupButtonListeners();
+        buttonDisabled = false;
     });
-    }, 500);
+    }, 3000);
 }
+
 function displayWin(){
-    document.body.setAttribute('style', "opacity: 0; transition: opacity 0.5s ease-in-out;")
+    document.body.setAttribute('style', "opacity: 0; transition: opacity 3s ease-in-out;")
     setTimeout(() => {
-        document.body.innerHTML = '';
+        container.innerHTML = '';
         document.body.setAttribute('style', "opacity: 1; transition: none;\
-background-image: url('https://media3.giphy.com/media/J0y8lFm1r7H8c/giphy.gif?cid=ecf05e476qgasnwmj9uqw6vqyoxhkt12kf3vornnojthou1n&ep=v1_gifs_related&rid=giphy.gif&ct=g');\
-background-size: cover; background-repeat: no-repeat; background-position: center center;");
+background-image: url('https://media3.giphy.com/media/J0y8lFm1r7H8c/giphy.gif?cid=ecf05e476qgasnwmj9uqw6vqyoxhkt12kf3vornnojthou1n&ep=v1_gifs_related&rid=giphy.gif&ct=g');");
 const result = document.createElement('h1');
 result.textContent = "YOU WIN! ...WANNA TO TRY AGAIN?";
 result.setAttribute('style', 'color: red;');
-document.body.appendChild(result);
+container.appendChild(result);
 
 const reset = document.createElement('button');
 reset.setAttribute('style', 'padding: 8px; font-size: 18px; font-family: "Comic Sans", sans-serif;');
 reset.textContent = 'RESET';
-document.body.appendChild(reset);
+container.appendChild(reset);
 
 reset.addEventListener('click', () => {
     scorePlayer = 0;
     scorePc = 0;
     playerBeat = 0;
-    document.body.innerHTML = originalContent;
+    container.innerHTML = originalContent;
+    document.body.setAttribute('style', "background-image: url('https://media.tenor.com/Ql7S1U-bqPIAAAAC/mortal-kombat.gif');");
+
+    setupButtonListeners();
+    buttonDisabled = false;
 });
-});
-    
+}, 3000);
 }
 const textResult = document.createElement('div');
-document.body.appendChild(textResult);
 function declareWinner(playerSelection) {
+    textResult.classList.add('result');
+    container.appendChild(textResult);
         textResult.textContent = playRound(playerSelection, getComputerChoice());
         if (playerBeat == -1) {
             textResult.setAttribute('style', 'color: red; text-align: center;')
@@ -133,16 +143,22 @@ function declareWinner(playerSelection) {
         playerScore = document.querySelector('#playerScore');
         playerScore.textContent = 'Du: ' + scorePlayer;
     if(scorePc == 5){
+        buttonDisabled = true;
         displayLoss();
     }
-    if(scorePlayer == 5){
+    else if(scorePlayer == 5){
+        buttonDisabled = true;
         displayWin();
     }
 }
+function setupButtonListeners() {
 const rock = document.querySelector('#rock');
-rock.addEventListener('click', () => declareWinner('rock'));
+rock.addEventListener('click', () => {if(!buttonDisabled){declareWinner('rock');}});
 const paper = document.querySelector('#paper');
-paper.addEventListener('click', () => declareWinner('paper'))
+paper.addEventListener('click', () => {if(!buttonDisabled){declareWinner('paper');}});
 const scissors = document.querySelector('#scissors');
-scissors.addEventListener('click', () => declareWinner('scissors'));
+scissors.addEventListener('click', () => {if(!buttonDisabled){declareWinner('scissors');}});
+}
+
+setupButtonListeners();
 

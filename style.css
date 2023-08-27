@@ -1,11 +1,40 @@
+body {
+    margin: 0;
+    padding: 20;
+    overflow-x: hidden;
+    background-image: url('https://media.tenor.com/Ql7S1U-bqPIAAAAC/mortal-kombat.gif');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-size: contain;
+        background-position: top;
+    }
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#header {
+    display: flex;
+    justify-content: center;
+}
+
 .buttons {
     display: flex;
     gap: 50px;
     justify-content: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
+
 .scores {
-    margin-top: 60px;
+    display: flex;
     gap: 40px;
-    text-align: center;
+    justify-content: center;
 }
