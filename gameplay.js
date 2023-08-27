@@ -52,17 +52,24 @@ function playRound(playerSelection, ComputerSelection) {
 
 originalContent = `
 <header id="header">
-    <h1>Rock Paper Scissors</h1>
-</header>
-<div class="buttons">
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissors">Scissors</button>
-</div>
-<div class="scores">
-    <div id="pcScore">Scorpion: 0</div>
-    <div id="playerScore">Du: 0</div>
-</div>
+        <div>Rock Paper Scissors</div>
+        <img src="https://cdn.pixabay.com/photo/2019/07/06/16/44/game-4320781_1280.png", alt="picture of scorpion">
+    </header>
+    <div class="weapons">
+        <div>Choose your Weapon!</div>
+    </div>
+    <div class="buttons">
+        <button id="rock">Rock</button>
+        <button id="scissors">Scissors</button>
+        <button id="paper">Paper</button>
+    </div>
+    <div class="scores">
+        <div id="pcScore">Scorpion: 0</div>
+        <div id="playerScore">Du: 0</div>
+    </div>
+    <div class="bottom">
+        <div id="copyright">&copy; The Odin Project 2023</div>
+    </div>
 `;
 
 container = document.querySelector('.flex-container');
@@ -74,12 +81,13 @@ function displayLoss(){
         document.body.setAttribute('style', "opacity: 1; transition: none;\
 background-image: url('https://media.tenor.com/aNya2k4nU9AAAAAC/mortal-kombat.gif');");
     const result = document.createElement('h1');
+    result.classList.add('headerWin');
     result.textContent = "YOU LOSE! ...DARE TO TRY AGAIN?";
     result.setAttribute('style', 'color: red;');
     container.appendChild(result);
 
     const reset = document.createElement('button');
-    reset.setAttribute('style', 'padding: 8px; font-size: 18px; font-family: "Comic Sans", sans-serif;');
+    reset.classList.add('resetBtn');
     reset.textContent = 'RESET';
     container.appendChild(reset);
 
@@ -103,11 +111,13 @@ function displayWin(){
         document.body.setAttribute('style', "opacity: 1; transition: none;\
 background-image: url('https://media3.giphy.com/media/J0y8lFm1r7H8c/giphy.gif?cid=ecf05e476qgasnwmj9uqw6vqyoxhkt12kf3vornnojthou1n&ep=v1_gifs_related&rid=giphy.gif&ct=g');");
 const result = document.createElement('h1');
+result.classList.add('headerWin');
 result.textContent = "YOU WIN! ...WANNA TO TRY AGAIN?";
 result.setAttribute('style', 'color: red;');
 container.appendChild(result);
 
 const reset = document.createElement('button');
+reset.classList.add('resetBtn');
 reset.setAttribute('style', 'padding: 8px; font-size: 18px; font-family: "Comic Sans", sans-serif;');
 reset.textContent = 'RESET';
 container.appendChild(reset);
@@ -125,18 +135,20 @@ reset.addEventListener('click', () => {
 }, 3000);
 }
 const textResult = document.createElement('div');
+textResult.classList.add('result');
 function declareWinner(playerSelection) {
-    textResult.classList.add('result');
     container.appendChild(textResult);
+    container.insertBefore(document.querySelector('.result'), document.querySelector('.scores'));
+    container.insertBefore(document.querySelector('.result'), document.querySelector('.bottom'));
         textResult.textContent = playRound(playerSelection, getComputerChoice());
         if (playerBeat == -1) {
-            textResult.setAttribute('style', 'color: red; text-align: center;')
+            textResult.setAttribute('style', 'color: red;')
         }
         else if (playerBeat == 0) {
-            textResult.setAttribute('style', 'color: black; text-align: center;')
+            textResult.setAttribute('style', 'color: bisque;')
         }
         else {
-            textResult.setAttribute('style', 'color: green; text-align: center;')
+            textResult.setAttribute('style', 'color: green;')
         }
         pcScore = document.querySelector('#pcScore');
         pcScore.textContent = 'Scorpion: ' + scorePc;
@@ -161,4 +173,5 @@ scissors.addEventListener('click', () => {if(!buttonDisabled){declareWinner('sci
 }
 
 setupButtonListeners();
+
 

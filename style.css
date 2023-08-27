@@ -8,6 +8,13 @@ body {
     background-repeat: no-repeat;
 }
 
+@font-face {
+    font-family: 'Samurai'; /* Choose a name for your font */
+    src: url('kaindra.ttf') format('woff2');
+    /* Add additional font formats if needed */
+}
+
+
 @media (max-width: 768px) {
     body {
         background-size: contain;
@@ -24,17 +31,71 @@ body {
 #header {
     display: flex;
     justify-content: center;
+    font-family: 'Samurai', sans-serif;
+    font-size: 44px;
+    color: black;
+    padding: 16px;
+    background-color: bisque;
+    gap: 50px;
+    height: 50px;
+}
+
+#header img {
+    width: auto;
+    height: 60px;
+}
+
+.weapons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    font-family: 'Samurai', sans-serif;
+    font-size: 32px;
+    color:rgb(204, 57, 57);
+    margin-top: 130px;
 }
 
 .buttons {
     display: flex;
     gap: 50px;
     justify-content: center;
-    margin-bottom: 60px;
+    align-items: center;
+    height: 180px;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+    font-family: 'Samurai', sans-serif;
+    font-size: 28px;
+    color:bisque;
 }
 
 .scores {
     display: flex;
     gap: 40px;
     justify-content: center;
+    color:bisque;
+    font-size: 26px;
+    font-family: 'Samurai', sans-serif;
+    margin-bottom: 20px;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-top: auto;
+}
+
+#copyright {
+    background-color: bisque;
+    color:black;
+    font-family: 'Samurai', sans-serif;
+    font-size: 18px;
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
 }
