@@ -1,63 +1,148 @@
 let scorePlayer = 0;
 let scorePc = 0;
-function getComputerChoice(){
+let playerBeat = 0;
+function getComputerChoice() {
     let options = ['scissors', 'rock', 'paper'];
     return options[Math.floor(Math.random() * 3)];
 }
-function playRound(playerSelection, ComputerSelection){
+function playRound(playerSelection, ComputerSelection) {
     let output = "";
-    switch(true){
+    switch (true) {
         case playerSelection.toLowerCase() == ComputerSelection.toLowerCase():
             output = 'Draw! You have to do better to beat me!';
+            playerBeat = 0;
             break;
         case playerSelection.toLowerCase() == 'rock' && ComputerSelection.toLowerCase() == 'paper':
             output = 'You lose! Paper beats Rock!';
             scorePc++;
+            playerBeat = -1;
             break;
         case playerSelection.toLowerCase() == 'paper' && ComputerSelection.toLowerCase() == 'scissors':
             output = 'You lose! Scissors beats Paper!';
             scorePc++;
+            playerBeat = -1;
             break;
         case playerSelection.toLowerCase() == 'scissors' && ComputerSelection.toLowerCase() == 'rock':
             output = 'You lose! Rock beats Scissors!';
             scorePc++;
+            playerBeat = -1;
             break;
         case playerSelection.toLowerCase() == 'paper' && ComputerSelection.toLowerCase() == 'rock':
             output = 'You win! Paper beats Rock!';
             scorePlayer++;
+            playerBeat = 1;
             break;
         case playerSelection.toLowerCase() == 'scissors' && ComputerSelection.toLowerCase() == 'paper':
             output = 'You win! Scissors beats Paper!';
             scorePlayer++;
+            playerBeat = 1;
             break;
         case playerSelection.toLowerCase() == 'rock' && ComputerSelection.toLowerCase() == 'scissors':
             output = 'You win! Rock beats scissors!';
             scorePlayer++;
+            playerBeat = 1;
             break;
-        default: 
+        default:
             output = "Ups.. there has been a mistake!"
             break;
     }
     return output;
 }
 
-function game(){
-    while(scorePc < 5 && scorePlayer < 5){
-        playerSelection = prompt();
-        ComputerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, ComputerSelection));
-        console.log('Your score: ' + scorePlayer);
-        console.log('Computer score: ' + scorePc);
-        console.log();
-    }
-    if(scorePc === 5){
-        console.log('HAH! I knew you had no chance!');
-    }
-    else{
-        console.log('WHATT?? I mean... there\'s always a first time. AGAIN!');
-    }
-    scorePc = 0;
-    scorePlayer = 0;
-}
+originalContent = `
+<header>
+        <h1 style="text-align: center;">Rock Paper Scissors</h1>
+    </header>
+    <div class="buttons">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div class="scores">
+        <div id="pcScore">Scorpion: 0</div>
+        <div id="playerScore">Du: 0</div>
+    </div>
+`;
 
-game();
+function displayLoss(){
+    document.body.setAttribute('style', "opacity: 0; transition: opacity 0.5s ease-in-out;");
+    setTimeout(() => {
+        document.body.innerHTML = '';
+        document.body.setAttribute('style', "opacity: 1; transition: none;\
+background-image: url('https://media.tenor.com/aNya2k4nU9AAAAAC/mortal-kombat.gif');\
+background-size: cover; background-repeat: no-repeat; background-position: center center;");
+    const result = document.createElement('h1');
+    result.textContent = "YOU LOSE! ...DARE TO TRY AGAIN?";
+    result.setAttribute('style', 'color: red;');
+    document.body.appendChild(result);
+
+    const reset = document.createElement('button');
+    reset.setAttribute('style', 'padding: 8px; font-size: 18px; font-family: "Comic Sans", sans-serif;');
+    reset.textContent = 'RESET';
+    document.body.appendChild(reset);
+
+    reset.addEventListener('click', () => {
+        scorePlayer = 0;
+        scorePc = 0;
+        playerBeat = 0;
+        document.body.innerHTML = originalContent;
+    });
+    }, 500);
+}
+function displayWin(){
+    document.body.setAttribute('style', "opacity: 0; transition: opacity 0.5s ease-in-out;")
+    setTimeout(() => {
+        document.body.innerHTML = '';
+        document.body.setAttribute('style', "opacity: 1; transition: none;\
+background-image: url('https://media3.giphy.com/media/J0y8lFm1r7H8c/giphy.gif?cid=ecf05e476qgasnwmj9uqw6vqyoxhkt12kf3vornnojthou1n&ep=v1_gifs_related&rid=giphy.gif&ct=g');\
+background-size: cover; background-repeat: no-repeat; background-position: center center;");
+const result = document.createElement('h1');
+result.textContent = "YOU WIN! ...WANNA TO TRY AGAIN?";
+result.setAttribute('style', 'color: red;');
+document.body.appendChild(result);
+
+const reset = document.createElement('button');
+reset.setAttribute('style', 'padding: 8px; font-size: 18px; font-family: "Comic Sans", sans-serif;');
+reset.textContent = 'RESET';
+document.body.appendChild(reset);
+
+reset.addEventListener('click', () => {
+    scorePlayer = 0;
+    scorePc = 0;
+    playerBeat = 0;
+    document.body.innerHTML = originalContent;
+});
+});
+    
+}
+const textResult = document.createElement('div');
+document.body.appendChild(textResult);
+function declareWinner(playerSelection) {
+        textResult.textContent = playRound(playerSelection, getComputerChoice());
+        if (playerBeat == -1) {
+            textResult.setAttribute('style', 'color: red; text-align: center;')
+        }
+        else if (playerBeat == 0) {
+            textResult.setAttribute('style', 'color: black; text-align: center;')
+        }
+        else {
+            textResult.setAttribute('style', 'color: green; text-align: center;')
+        }
+        pcScore = document.querySelector('#pcScore');
+        pcScore.textContent = 'Scorpion: ' + scorePc;
+        playerScore = document.querySelector('#playerScore');
+        playerScore.textContent = 'Du: ' + scorePlayer;
+    if(scorePc == 5){
+        displayLoss();
+    }
+    if(scorePlayer == 5){
+        displayWin();
+    }
+}
+const rock = document.querySelector('#rock');
+rock.addEventListener('click', () => declareWinner('rock'));
+const paper = document.querySelector('#paper');
+paper.addEventListener('click', () => declareWinner('paper'))
+const scissors = document.querySelector('#scissors');
+scissors.addEventListener('click', () => declareWinner('scissors'));
+
