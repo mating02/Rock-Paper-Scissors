@@ -96,6 +96,7 @@ background-image: url('https://media.tenor.com/aNya2k4nU9AAAAAC/mortal-kombat.gi
     const result = document.getElementById('resultHeader');
     result.textContent = 'YOU LOSE! ...DARE TO TRY AGAIN?';
     result.setAttribute('style', 'color: red;');
+    const reset = document.querySelector('.resetBtn');
 
     reset.addEventListener('click', () => {
         scorePlayer = 0;
@@ -119,7 +120,7 @@ background-image: url('https://media3.giphy.com/media/J0y8lFm1r7H8c/giphy.gif?ci
 const result = document.getElementById('resultHeader')
 result.setAttribute('style', 'color: green;');
 result.textContent = 'YOU WIN! ...WANNA TRY AGAIN?';
-
+const reset = document.querySelector('.resetBtn');
 reset.addEventListener('click', () => {
     scorePlayer = 0;
     scorePc = 0;

@@ -20,18 +20,11 @@ body {
     src: url('bloodyFont.ttf') format('woff2');
 }
 
-
-@media (max-width: 768px) {
-    body {
-        background-size: contain;
-        background-position: top;
-    }
-}
-
 .flex-container{
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    max-height: 100vh;
 }
 
 #header {
@@ -144,9 +137,10 @@ body {
 .header {
     display:flex;
     padding: 20px;
-    margin-top: 200px;
+    padding-top: 200px;
     justify-content: center;
     align-items: center;
+    flex-shrink: 3;
 }
 
 #resultHeader {
@@ -157,11 +151,13 @@ body {
 .imgPart {
     display: flex;
     justify-content: center;
+    flex-shrink: 1;
 }
 
 .resetPart {
     display:flex;
     justify-content: center;
+    flex-shrink: 1;
 }
 .resetBtn {
     width: 220px;
