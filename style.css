@@ -1,17 +1,23 @@
 body {
     margin: 0;
-    padding: 20;
-    overflow-x: hidden;
+    padding: 0;
+    overflow: hidden;
     background-image: url('https://media.tenor.com/Ql7S1U-bqPIAAAAC/mortal-kombat.gif');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 @font-face {
     font-family: 'Samurai'; /* Choose a name for your font */
     src: url('kaindra.ttf') format('woff2');
     /* Add additional font formats if needed */
+}
+
+@font-face {
+    font-family: 'bloody';
+    src: url('bloodyFont.ttf') format('woff2');
 }
 
 
@@ -49,19 +55,54 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
-    font-family: 'Samurai', sans-serif;
-    font-size: 32px;
-    color:rgb(204, 57, 57);
-    margin-top: 130px;
+    font-family: 'bloody', sans-serif;
+    font-size: 50px;
+    color:red;
+    margin-top: 160px;
 }
 
 .buttons {
     display: flex;
-    gap: 50px;
+    gap: 33px;
     justify-content: center;
     align-items: center;
     height: 180px;
+}
+
+#rock {
+    width: 120px;
+    height: 120px;
+    border: 8px solid black;
+    border-radius: 4px;
+    background-image: url('https://cdn.pixabay.com/photo/2020/06/14/23/18/fist-5299696_1280.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color:bisque;
+    background-position: center center;
+}
+
+#scissors {
+    width: 120px;
+    height: 120px;
+    border: 8px solid black;
+    border-radius: 4px;
+    background-image: url('https://cdn.pixabay.com/photo/2012/04/02/13/19/hand-24473_1280.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color:bisque;
+    background-position: center center;
+}
+
+#paper {
+    width: 120px;
+    height: 120px;
+    border: 8px solid black;
+    border-radius: 4px;
+    background-image: url('https://cdn.pixabay.com/photo/2013/07/13/01/23/hand-155662_1280.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color:bisque;
+    background-position: center center;
 }
 
 .result {
@@ -98,4 +139,46 @@ body {
     width: 100%;
     text-align: center;
     box-sizing: border-box;
+}
+
+.header {
+    display:flex;
+    padding: 20px;
+    margin-top: 200px;
+    justify-content: center;
+    align-items: center;
+}
+
+#resultHeader {
+    font-size: 80px;
+    font-family: 'bloody';
+}
+
+.imgPart {
+    display: flex;
+    justify-content: center;
+}
+
+.resetPart {
+    display:flex;
+    justify-content: center;
+}
+.resetBtn {
+    width: 220px;
+    height: 70px;
+    background-color: bisque;
+    color: black;
+    font-size: 26px;
+    font-family: 'Samurai';
+    border: 6px solid black;
+    border-radius: 6px;
+}
+
+.scorpionimg {
+    width: auto;
+    height: 160px;
+}
+
+button:hover {
+    transform: scale(1.2);
 }

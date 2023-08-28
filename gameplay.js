@@ -59,9 +59,9 @@ originalContent = `
         <div>Choose your Weapon!</div>
     </div>
     <div class="buttons">
-        <button id="rock">Rock</button>
-        <button id="scissors">Scissors</button>
-        <button id="paper">Paper</button>
+        <button id="rock"></button>
+        <button id="scissors"></button>
+        <button id="paper"></button>
     </div>
     <div class="scores">
         <div id="pcScore">Scorpion: 0</div>
@@ -72,24 +72,30 @@ originalContent = `
     </div>
 `;
 
+newContent = `
+<header class="header">
+<div id="resultHeader"></div>
+</header>
+<div class="imgPart">
+<img class="scorpionimg" src="https://cdn.pixabay.com/photo/2019/07/06/16/44/game-4320781_1280.png" alt="scorpion's head">
+</div>
+<div class="resetPart">
+<button class="resetBtn">RESET</button>
+</div>
+`
+
+
 container = document.querySelector('.flex-container');
 
 function displayLoss(){
     document.body.setAttribute('style', "opacity: 0; transition: opacity 3s ease-in-out;");
     setTimeout(() => {
-        container.innerHTML = '';
-        document.body.setAttribute('style', "opacity: 1; transition: none;\
+        container.innerHTML = newContent;
+        document.body.setAttribute('style', "opacity: 0.9; transition: opacity 2s ease-in-out;\
 background-image: url('https://media.tenor.com/aNya2k4nU9AAAAAC/mortal-kombat.gif');");
-    const result = document.createElement('h1');
-    result.classList.add('headerWin');
-    result.textContent = "YOU LOSE! ...DARE TO TRY AGAIN?";
+    const result = document.getElementById('resultHeader');
+    result.textContent = 'YOU LOSE! ...DARE TO TRY AGAIN?';
     result.setAttribute('style', 'color: red;');
-    container.appendChild(result);
-
-    const reset = document.createElement('button');
-    reset.classList.add('resetBtn');
-    reset.textContent = 'RESET';
-    container.appendChild(reset);
 
     reset.addEventListener('click', () => {
         scorePlayer = 0;
@@ -107,20 +113,12 @@ background-image: url('https://media.tenor.com/aNya2k4nU9AAAAAC/mortal-kombat.gi
 function displayWin(){
     document.body.setAttribute('style', "opacity: 0; transition: opacity 3s ease-in-out;")
     setTimeout(() => {
-        container.innerHTML = '';
-        document.body.setAttribute('style', "opacity: 1; transition: none;\
+        container.innerHTML = newContent;
+        document.body.setAttribute('style', "opacity: 0.9; transition: opacity 2s ease-in-out;\
 background-image: url('https://media3.giphy.com/media/J0y8lFm1r7H8c/giphy.gif?cid=ecf05e476qgasnwmj9uqw6vqyoxhkt12kf3vornnojthou1n&ep=v1_gifs_related&rid=giphy.gif&ct=g');");
-const result = document.createElement('h1');
-result.classList.add('headerWin');
-result.textContent = "YOU WIN! ...WANNA TO TRY AGAIN?";
-result.setAttribute('style', 'color: red;');
-container.appendChild(result);
-
-const reset = document.createElement('button');
-reset.classList.add('resetBtn');
-reset.setAttribute('style', 'padding: 8px; font-size: 18px; font-family: "Comic Sans", sans-serif;');
-reset.textContent = 'RESET';
-container.appendChild(reset);
+const result = document.getElementById('resultHeader')
+result.setAttribute('style', 'color: green;');
+result.textContent = 'YOU WIN! ...WANNA TRY AGAIN?';
 
 reset.addEventListener('click', () => {
     scorePlayer = 0;
@@ -173,5 +171,4 @@ scissors.addEventListener('click', () => {if(!buttonDisabled){declareWinner('sci
 }
 
 setupButtonListeners();
-
 
